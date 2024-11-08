@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Connect to Awing
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Ấn chuột phải -> Tampermonkey -> Connect -> 6 hours
+// @version      1.1
+// @description  Ấn vào nút Connect trên web đăng nhập dể kết nối
 // @author       peashooter
 // @match        *://v1.awingconnect.vn/*
 // @grant        none
@@ -12,15 +12,34 @@
 
 (function() {
     'use strict';
-    GM_registerMenuCommand("6 hours", function() {
-        var usernameInput = document.querySelector('input[name="username"]');
-        var passwordInput = document.querySelector('input[name="password"]');
-        if (usernameInput && passwordInput) {
-            usernameInput.value = atob("YXdpbmczNjA=");
-            passwordInput.value = atob("QXdpbmczNjBAMjAxOA==");
-            document.querySelector('form').submit();
-        } else {
-            console.log("fail");
-        }
-    });
+
+    function createButton() {
+        
+        const button = document.createElement("button");
+        button.innerText = "Connect";
+        button.style.position = "fixed";
+        button.style.top = "10px";
+        button.style.right = "10px";
+        button.style.padding = "10px 20px";
+        button.style.backgroundColor = "#007bff";
+        button.style.color = "#ffffff";
+        button.style.border = "none";
+        button.style.borderRadius = "5px";
+        button.style.cursor = "pointer";
+        button.style.zIndex = "1000";
+
+        button.addEventListener("click", function() {
+            var usernameInput = document.querySelector('input[name="username"]');
+            var passwordInput = document.querySelector('input[name="password"]');
+            if (usernameInput && passwordInput) {
+                usernameInput.value = atob("YXdpbmczNjA=");
+                passwordInput.value = atob("QXdpbmczNjBAMjAxOA==");
+                document.querySelector('form').submit();
+            } else {
+                console.log("Không tìm thấy các trường username và password.");
+            }
+        });
+        document.body.appendChild(button);
+    }
+    window.addEventListener("load", createButton);
 })();
