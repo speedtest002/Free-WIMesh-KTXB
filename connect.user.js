@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Connect to Awing
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Ấn vào nút Connect trên web đăng nhập dể kết nối
 // @author       peashooter
 // @match        *://v1.awingconnect.vn/*
@@ -16,7 +16,7 @@
     function createButton() {
         
         const button = document.createElement("button");
-        button.innerText = "Connect";
+        button.innerText = "Kết nối 2 tiếng";
         button.style.position = "fixed";
         button.style.top = "10px";
         button.style.right = "10px";
@@ -32,8 +32,8 @@
             var usernameInput = document.querySelector('input[name="username"]');
             var passwordInput = document.querySelector('input[name="password"]');
             if (usernameInput && passwordInput) {
-                usernameInput.value = atob("YXdpbmczNjA=");
-                passwordInput.value = atob("QXdpbmczNjBAMjAxOA==");
+                usernameInput.value = "awing120";
+                passwordInput.value = "Awing120@2018";
                 document.querySelector('form').submit();
             } else {
                 console.log("Không tìm thấy các trường username và password.");
